@@ -17,14 +17,24 @@ export default class App extends Component {
     filter: '',
   };
 
-  handleChange = e => {
-    const value = e.target.value;
-    const name = e.target.name;
+  componentDidMount() {
+    const contacts = localStorage.getItem('contacts');
+    const parsedContacts = JSON.parse(contacts);
+    console.log(parsedContacts);
 
     this.setState({
-      [name]: value,
+      contacts: parsedContacts,
     });
-  };
+  }
+
+  componentDidUpdate(_, prevState) {
+    const prevContacts = prevState.contacts;
+    const nextContacts = this.state.contacts;
+
+    if (prevContacts !== nextContacts) {
+      localStorage.setItem('contacts', JSON.stringify(nextContacts));
+    }
+  }
 
   addContact = data => {
     const { name, number } = data;
