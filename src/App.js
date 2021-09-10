@@ -20,7 +20,6 @@ export default class App extends Component {
   componentDidMount() {
     const contacts = localStorage.getItem('contacts');
     const parsedContacts = JSON.parse(contacts);
-    console.log(parsedContacts);
 
     this.setState({
       contacts: parsedContacts,
@@ -33,6 +32,9 @@ export default class App extends Component {
 
     if (prevContacts !== nextContacts) {
       localStorage.setItem('contacts', JSON.stringify(nextContacts));
+    }
+    if (nextContacts.length === 0) {
+      localStorage.removeItem('contacts');
     }
   }
 
