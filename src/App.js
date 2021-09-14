@@ -54,6 +54,7 @@ export default class App extends Component {
 
     if (checkOnSameContact) {
       alert(`${newContact.name} is already in contacts`);
+      return;
     }
     if (name === '' && number === '') {
       return;
